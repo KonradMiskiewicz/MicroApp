@@ -1,0 +1,124 @@
+html,body {
+    height: 100%;
+    margin: 0;
+}
+
+.navigation {
+	background: center center no-repeat #00004d;
+	height: 15%;
+	min-height: 15%;
+	background: linear-gradient(to bottom right, #00004d , #0033CC);
+}
+
+.content {
+	height: 100%;
+    min-height: 100%;
+}
+
+#mainlinks {
+	color: white;
+	padding-left: 15%;
+	text-decoration: none;
+}
+
+#mainlinks:hover {
+	color: yellow;
+}
+
+#account {
+	color: white;
+	position: absolute;
+	right: 10px;
+	line-height: 0%;
+	text-decoration: none;
+}
+
+html>body .content {
+  height: auto;
+}
+
+#one {
+  background: center center no-repeat scroll #333333;
+  background: linear-gradient(to bottom right, #0033CC, #333333);
+}
+
+#logo {
+	height: 100%;
+}
+
+ul {
+    display: inline-block;
+    padding-top: 10px;
+    margin-left: 20px;
+}
+ul li {display: inline-block;}
+ul li:hover {background: #00004d;}
+ul li:hover ul {display: block;}
+ul li ul {
+	text-align: left;
+	right: 0px;
+    position: absolute;
+    width: 150px;
+    display: none;
+}
+ul li ul li { 
+    background: #00004d; 
+    display: block; 
+}
+ul li ul li a {display: block !important;} 
+ul li ul li:hover {background: #0033CC;}
+
+#menu {
+	color: white;
+	text-decoration: none;
+}
+
+#menu:hover {
+	color: yellow;
+}
+
+#categories > a {
+	color: white;
+	text-decoration: none;
+    display: block;
+}
+
+#categories > a:hover {
+	color: yellow;
+}
+
+#categoryText:before {
+	font-family: Arial;
+	content: "Categories:";
+	color: white;
+}
+
+
+.headers {
+	color: white;
+	text-align: center;
+}
+
+#game {
+	margin-left: 10%;
+	position: relative;
+}
+
+#price:before {
+	content: "Price: ";
+}
+
+#price:after {
+	content: "$";
+}
+
+#cat:before {
+	content: "Category: "
+}
+
+#imageGame {
+	display: block;
+    margin: 0 auto;
+	width: 20%;
+	heigth: 20%;
+}

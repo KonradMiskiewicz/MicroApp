@@ -1,0 +1,31 @@
+#links {
+	text-decoration:none;
+}
+
+#back {
+	background-image:url('2914.jpg');
+}
+
+#functionalRows {
+	text-align:center;
+	line-height:120px;
+}
+
+#upRow {
+	height: 400px;
+	text-align:center;
+}
+
+#centerRow {
+	height:160px;
+}
+
+#controller {
+	content:url(controller.png);
+	line-height:400px;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+}

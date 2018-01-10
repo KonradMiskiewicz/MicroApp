@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../game.css"></link>
+<title>Money View</title>
+<script>
+function addF(id, money) {
+	$.ajax({
+		url:"http://localhost:8765/api/account/account/add/" + money + "/" + id, 
+		type: "POST", 
+		xhrFields: {
+		       withCredentials: false
+		},
+		crossDomain: true,
+		success: function() {
+			var currentBalance = parseFloat($("#balance").html());
+			
+		    var newBalance = currentBalance + money;
+		    
+		    newBalance = newBalance.toFixed(2);
+		    
+			$("#balance").html(newBalance);
+		},
+		error: function(jqxhr, status, error) {
+			alert(status);
+			alert(error);
+		}
+    });
+}
+
+$(document).ready(function() {
+	var a = parseFloat($("#balance").html());
+	a = a.toFixed(2);
+	$("#balance").html(a);
+});
+</script>
+</head>
+<body>
+    <div class="navigation">
+	    <img src="/../controller.png" id="logo"></img>
+		<a th:href="@{http://localhost:8080/userService/mainPage}" id="mainlinks">Main Site</a>
+		<a th:href="@{http://localhost:8080/userService/yourGames}" id="mainlinks">Your games</a>
+		<a th:href="@{http://localhost:8080/userService/About}" id="mainlinks">About</a>
+		<a th:href="@{http://localhost:8080/userService/Help}" id="mainlinks">Help</a>
+		<ul>
+		    <li>
+		        <a href="#" id="account">Account</a>
+				<ul>
+				    <li><a th:href="@{http://localhost:8080/userService/account}" id="menu">Account settings</a></li>
+					<li><a th:href="@{http://localhost:8080/userService/money}" id="menu">Money</a></li>
+					<li><a th:href="@{http://localhost:8080/userService/logout}" id="menu">Logout</a></li>
+				</ul>
+		    </li>
+		</ul>
+	</div>
+	<div class="content" id="one">
+	    <div class="container-fluid">
+			<div class="row">
+			    <div class="col-lg-2" id="categories">
+				    <h4 id="categoryText"></h4>
+					<a th:href="@{http://localhost:8080/userService/game/category/RPG}">RPG</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/FPS}">FPS</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/Adventure}">Adventure</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/Strategy}">Strategy</a>
+				</div>
+				<div class="col-lg-10" id="games">
+				    <h1>Your money: </h1><h1 id="balance" th:text="${acc.balance}"></h1><h1>$</h1>
+					<button id="add10" th:onclick="'javascript:addF(\'' + ${user.id} + '\', 10);'">Add 10$</button>
+					<button id="add20" th:onclick="'javascript:addF(\'' + ${user.id} + '\', 20);'">Add 20$</button>
+					<button id="add50" th:onclick="'javascript:addF(\'' + ${user.id} + '\', 50);'">Add 50$</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

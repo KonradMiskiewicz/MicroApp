@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/../game.css"></link>
+<title th:text="${game.name}"></title>
+<script>
+function buyF(price, idgame, balance) {
+	price = parseFloat(price);
+	if (price > balance) {
+		alert("You haven't enough money");
+	} else {
+		var newBalance = balance - price;
+		newBalance = newBalance.toFixed(2);
+	    $.ajax({
+			url: "http://localhost:8080/make/buy/" + idgame + "/" + newBalance,
+			type: "POST",
+			success: function() {
+				$("#balance").html("Your money:" + newBalance + "$");
+		        
+		        $("[data-dismiss=modal]").trigger({ type: "click" });
+		        
+		        location.reload();
+			},
+			error: function(jqxhr, status, error) {
+				$("[data-dismiss=modal]").trigger({ type: "click" });
+				
+				alert("Error. Try again later");
+			}
+    	}); 
+	}
+}
+
+$(document).ready(function() {	
+	var a = parseFloat($("#balance").html());
+	a = a.toFixed(2);
+	$("#balance").html("Your money:" + a + "$");
+});
+</script>
+</head>
+<body>
+    <div class="navigation">
+	    <img src="/../controller.png" id="logo"></img>
+		<a th:href="@{http://localhost:8080/userService/mainPage}" id="mainlinks">Main Site</a>
+		<a th:href="@{http://localhost:8080/userService/yourGames}" id="mainlinks">Your games</a>
+		<a th:href="@{http://localhost:8080/userService/About}" id="mainlinks">About</a>
+		<a th:href="@{http://localhost:8080/userService/Help}" id="mainlinks">Help</a>
+		<ul>
+		    <li>
+		        <a href="#" id="account">Account</a>
+				<ul>
+				    <li><a th:href="@{http://localhost:8080/userService/account}" id="menu">Account settings</a></li>
+					<li><a th:href="@{http://localhost:8080/userService/money}" id="menu">Money</a></li>
+					<li><a th:href="@{http://localhost:8080/userService/logout}" id="menu">Logout</a></li>
+				</ul>
+		    </li>
+		</ul>
+	</div>
+	<div class="content" id="one">
+	    <div class="container-fluid">
+			<div class="row">
+			    <div class="col-lg-2" id="categories">
+				    <h4 id="categoryText"></h4>
+					<a th:href="@{http://localhost:8080/userService/game/category/RPG}">RPG</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/FPS}">FPS</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/Adventure}">Adventure</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/Strategy}">Strategy</a>
+				</div>
+				<div class="col-lg-10" id="games">
+				    <p class="headers" id="balance" th:text="${acc.balance}"></p>
+					<h1 th:text="${game.name}" class="headers"></h1>
+					<img id="imageGame" th:src="@{'/../logos/' + ${game.idgame} + '.jpg'}"></img>
+					<h1 class="headers">Details:</h1>
+					<p class="headers" id="cat" th:text="${game.category}"></p>
+					<p class="headers" id="price" th:text="${game.price}"></p>
+					
+					<button th:if="${isBought}" id="bought" style="margin-left: 48%;">Bought</button>
+					
+					<button th:unless="${isBought}" id="buy" style="margin-left: 48%;" th:onclick="'javascript:buyF(\'' + ${game.price} + '\', 
+					    \'' + ${game.idgame} + '\', \'' + ${acc.balance} + '\');'" data-toggle="modal" data-target="#loading">Buy</button>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div id="loading" class="modal fade" role="dialog">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-body">
+		                <img height="400" width="400" src="/../loading.gif"></img>
+		            </div>
+		            <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+		        </div>
+		    </div>
+		</div>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/../first.css"></link>
+<title th:text="${title}"></title>
+</head>
+<body>
+    <div class="navigation">
+	    <img src="/../controller.png" id="logo"></img>
+		<a th:href="@{http://localhost:8080/userService/mainPage}" id="mainlinks">Main Site</a>
+		<a th:href="@{http://localhost:8080/userService/yourGames}" id="mainlinks">Your games</a>
+		<a th:href="@{http://localhost:8080/userService/About}" id="mainlinks">About</a>
+		<a th:href="@{http://localhost:8080/userService/Help}" id="mainlinks">Help</a>
+		<ul>
+		    <li>
+		        <a href="#" id="account">Account</a>
+				<ul>
+				    <li><a th:href="@{http://localhost:8080/userService/account}" id="menu">Account settings</a></li>
+					<li><a th:href="@{http://localhost:8080/userService/money}" id="menu">Money</a></li>
+					<li><a th:href="@{http://localhost:8080/userService/logout}" id="menu">Logout</a></li>
+				</ul>
+		    </li>
+		</ul>
+	</div>
+	<div class="content" id="one">
+	    <div class="container-fluid">
+			<div class="row">
+			    <div class="col-lg-2" id="categories">
+				    <h4 id="categoryText"></h4>
+					<a th:href="@{http://localhost:8080/userService/game/category/RPG}">RPG</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/FPS}">FPS</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/Adventure}">Adventure</a>
+					<a th:href="@{http://localhost:8080/userService/game/category/Strategy}">Strategy</a>
+				</div>
+				<div class="col-lg-10" id="games">
+					<h1 class="headers">Your Games:</h1>
+					<div class="row">
+					    <a id="game" th:each="game: ${games}" th:href="@{'http://localhost:8080/userService/game/gameInfo/' + ${game.idgame}}">
+					        <img id="logoImage" th:src="@{'/../logos/' + ${game.idgame} + '.jpg'}"></img>
+					        <p class="price" th:text="${game.price}"></p>
+					    </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

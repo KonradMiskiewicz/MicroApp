@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../index.css"></link>
+</head>
+<body id="back">
+    <div class="container-fluid" >
+	    <div class="row" style="" id="upRow">
+		    <img id="controller" src="../controller.png"></img>
+			<h1 style="color:white">START YOUR GAME NOW</h1>
+		</div>
+		<div class="row" id="centerRow">
+		    <div class="col-sm-6" id="functionalRows"><a id="links" th:href="@{http://localhost:8080/userService/login}"><h4>Login</h4><img src="../login.png"></img></a></div>
+			<div class="col-sm-6" id="functionalRows"><a id="links" th:href="@{http://localhost:8080/userService/register}"><h4>Register</h4><img src="../register.png"></img></a></div>
+		</div>
+	</div>
+	<footer id="footer">
+		    <div><a href="https://www.freepik.com/free-photos-vectors/background">Background image created by Kjpargeter - Freepik.com</a></div>
+	</footer>
+</body>
+</html>
